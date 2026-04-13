@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Rizowan Kabir | Python Backend Developer{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-logo">Port<span>folio</span></div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="{% url 'home' %}"      class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+    <li><a href="{% url 'about' %}"     class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+    <li><a href="{% url 'skills' %}"    class="{% if request.resolver_match.url_name == 'skills' %}active{% endif %}">Skills</a></li>
+    <li><a href="{% url 'services' %}"  class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">Services</a></li>
+    <li><a href="{% url 'portfolio' %}" class="{% if request.resolver_match.url_name == 'portfolio' %}active{% endif %}">Portfolio</a></li>
+    <li><a href="{% url 'contact' %}"   class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+      <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <a href="{% url 'contact' %}" class="nav-cta">Hire Me</a>
+    <button class="nav-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ MESSAGES ══ -->
+{% if messages %}
+<div class="toast-container">
+  {% for msg in messages %}
+  <div class="toast toast-{{ msg.tags }}">
+    <i class="fas {% if 'success' in msg.tags %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+    <span>{{ msg }}</span>
+    <button onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- ══ PAGE CONTENT ══ -->
+<main>{% block content %}{% endblock %}</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Port<span>folio</span></div>
+        <p>Python Backend Developer based in Dhaka, Bangladesh. Building clean, scalable web applications.</p>
+        <div class="footer-socials">
+          <a href="mailto:sohagrizowan@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://linkedin.com/in/rizowan-kabir" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/rizowanKabir" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="tel:+8801773155468" title="Phone"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <h4>Quick Links</h4>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'skills' %}">Skills</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'portfolio' %}">Portfolio</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p><i class="fas fa-envelope"></i> sohagrizowan@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +880 1773155468</p>
+        <p><i class="fas fa-map-marker-alt"></i> Uttara, Dhaka, Bangladesh</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>Rizowan Kabir</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ BACK TO TOP ══ -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  /* ── Mobile nav ── */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  /* ── Scroll animations ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── Navbar scroll effect ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    document.getElementById('backToTop').classList.toggle('show', window.scrollY > 400);
+  });
+
+  /* ── Dark/Light theme ── */
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    const icon = document.getElementById('themeIcon');
+    icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+  }
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-mode');
+    document.getElementById('themeIcon').className = 'fas fa-sun';
+  }
+
+  /* ── Auto-dismiss toasts ── */
+  document.querySelectorAll('.toast').forEach(t => setTimeout(() => t.remove(), 4000));
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

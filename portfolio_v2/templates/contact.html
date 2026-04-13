@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}Contact | Rizowan Kabir{% endblock %}
+
+{% block content %}
+
+<div class="page-hero fade-up">
+  <div class="section-label">Let's work together</div>
+  <h1 class="section-title">Get In <span>Touch</span></h1>
+  <p class="page-hero-sub">I'm actively looking for junior backend developer opportunities.</p>
+</div>
+
+<section class="section-wrap">
+  <div class="contact-wrapper">
+
+    <!-- Left info -->
+    <div class="contact-info fade-up">
+      <h3>Let's build something together</h3>
+      <p>If you have a project that needs a passionate Python/Django developer, or just want to connect — feel free to reach out. I respond within 24 hours.</p>
+
+      <div class="contact-links">
+        <a href="mailto:sohagrizowan@gmail.com" class="contact-link">
+          <div class="contact-link-icon"><i class="fas fa-envelope"></i></div>
+          <div class="link-text">
+            <small>Email</small>
+            <strong>sohagrizowan@gmail.com</strong>
+          </div>
+        </a>
+        <a href="tel:+8801773155468" class="contact-link">
+          <div class="contact-link-icon"><i class="fas fa-phone"></i></div>
+          <div class="link-text">
+            <small>Phone</small>
+            <strong>+880 1773155468</strong>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/rizowan-kabir" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><i class="fab fa-linkedin-in"></i></div>
+          <div class="link-text">
+            <small>LinkedIn</small>
+            <strong>linkedin.com/in/rizowan-kabir</strong>
+          </div>
+        </a>
+        <a href="https://github.com/rizowanKabir" target="_blank" class="contact-link">
+          <div class="contact-link-icon"><i class="fab fa-github"></i></div>
+          <div class="link-text">
+            <small>GitHub</small>
+            <strong>github.com/rizowanKabir</strong>
+          </div>
+        </a>
+        <div class="contact-link no-hover">
+          <div class="contact-link-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="link-text">
+            <small>Location</small>
+            <strong>Uttara, Dhaka, Bangladesh</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right form -->
+    <div class="contact-form-wrap fade-up">
+      <h3>Send a Message</h3>
+      <form method="POST" class="contact-form" novalidate>
+        {% csrf_token %}
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="id_name">Your Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}<span class="field-error">{{ form.name.errors.0 }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="id_email">Email Address</label>
+            {{ form.email }}
+            {% if form.email.errors %}<span class="field-error">{{ form.email.errors.0 }}</span>{% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id_subject">Subject</label>
+          {{ form.subject }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_message">Message</label>
+          {{ form.message }}
+          {% if form.message.errors %}<span class="field-error">{{ form.message.errors.0 }}</span>{% endif %}
+        </div>
+
+        <button type="submit" class="form-submit">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

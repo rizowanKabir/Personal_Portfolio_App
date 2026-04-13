@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About | Rizowan Kabir{% endblock %}
+
+{% block content %}
+
+<!-- ══ PAGE HERO ══ -->
+<div class="page-hero fade-up">
+  <div class="section-label">Who I am</div>
+  <h1 class="section-title">About <span>Me</span></h1>
+  <p class="page-hero-sub">Computer Science graduate · Python Backend Developer · Dhaka, Bangladesh</p>
+</div>
+
+<!-- ══ ABOUT MAIN ══ -->
+<section class="section-wrap">
+  <div class="about-grid">
+
+    <!-- Left: photo + info -->
+    <div class="about-left fade-up">
+      <div class="about-img-wrap">
+        <div class="about-img-ring">
+          <div class="about-img-inner">
+            <img src="{% static 'photo.jpeg' %}" alt="Rizowan">
+            <!-- Replace with: <img src="{% load static %}{% static 'img/rizowan.jpg' %}" alt="Rizowan"> -->
+          </div>
+        </div>
+      </div>
+      <div class="about-info">
+        <div class="info-row"><i class="fas fa-user"></i>         <span><strong>Name:</strong> Rizowan Kabir</span></div>
+        <div class="info-row"><i class="fas fa-map-marker-alt"></i><span><strong>Location:</strong> Uttara, Dhaka, Bangladesh</span></div>
+        <div class="info-row"><i class="fas fa-envelope"></i>     <span><strong>Email:</strong> sohagrizowan@gmail.com</span></div>
+        <div class="info-row"><i class="fas fa-phone"></i>        <span><strong>Phone:</strong> +880 1773155468</span></div>
+        <div class="info-row"><i class="fab fa-github"></i>       <span><strong>GitHub:</strong> github.com/rizowanKabir</span></div>
+        <div class="info-row"><i class="fab fa-linkedin"></i>     <span><strong>LinkedIn:</strong> linkedin.com/in/rizowan-kabir</span></div>
+        <div class="info-row"><i class="fas fa-language"></i>     <span><strong>Languages:</strong> Bangla, English</span></div>
+      </div>
+    </div>
+
+    <!-- Right: text + highlights -->
+    <div class="about-right fade-up">
+      <h2 class="about-heading">I'm a <span>Python Backend Developer</span></h2>
+      <p>Motivated and detail-oriented Computer Science graduate specializing in Python backend development with strong hands-on experience building functional web applications using Django, Flask, and FastAPI.</p>
+      <p>I have demonstrated ability to develop RESTful APIs, implement secure authentication systems, and design efficient database schemas through 5+ academic and personal projects.</p>
+      <p>As Organizing Secretary of IUBAT IT Society, I successfully coordinated technical workshops and mentored 200+ students — blending technical expertise with leadership and communication skills.</p>
+      <p>Eager to begin my professional career as a junior backend developer in Bangladesh, contributing technical skills while growing alongside experienced engineers.</p>
+
+      <div class="hero-btns" style="margin-top: 30px;">
+        <a href="{% url 'portfolio' %}" class="btn-primary"><i class="fas fa-eye"></i> My Portfolio</a>
+        <a href="{% url 'contact' %}"   class="btn-secondary"><i class="fas fa-paper-plane"></i> Hire Me</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section class="section-wrap section-alt">
+  <div class="section-label fade-up">My journey</div>
+  <h2 class="section-title fade-up">Work <span>Experience</span></h2>
+  <div class="experience-timeline">
+    {% for exp in experiences %}
+    <div class="exp-item fade-up">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">{{ exp.title }}</div>
+          <div class="exp-company">{{ exp.company }}{% if exp.location %} — {{ exp.location }}{% endif %}</div>
+        </div>
+        <span class="exp-date">{{ exp.start_date }} – {{ exp.end_date }}</span>
+      </div>
+      <ul>
+        {% for point in exp.get_points %}
+        <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% empty %}
+    <p class="empty-note">Add experience from admin panel.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ══ EDUCATION ══ -->
+<section class="section-wrap">
+  <div class="section-label fade-up">Academic background</div>
+  <h2 class="section-title fade-up">My <span>Education</span></h2>
+  <div class="edu-grid">
+    {% for edu in educations %}
+    <div class="edu-card fade-up">
+      <div class="edu-icon"><i class="fas {{ edu.icon }}"></i></div>
+      <h3>{{ edu.institution }}</h3>
+      <div class="edu-degree">{{ edu.degree }}</div>
+      <div class="edu-meta">{{ edu.location }}{% if edu.location %} &nbsp;·&nbsp; {% endif %}{{ edu.start_year }} – {{ edu.end_year }}</div>
+      {% if edu.cgpa %}<span class="edu-cgpa">CGPA: {{ edu.cgpa }}</span>{% endif %}
+    </div>
+    {% empty %}
+    <p class="empty-note">Add education from admin panel.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ══ SOFT SKILLS ══ -->
+<section class="section-wrap section-alt">
+  <div class="section-label fade-up">Beyond technical</div>
+  <h2 class="section-title fade-up">Soft <span>Skills</span></h2>
+  <div class="soft-skills-grid fade-up">
+    {% for item in soft_skills %}
+    <div class="soft-skill-card">
+      <i class="fas {{ item.icon }}"></i>
+      <span>{{ item.name }}</span>
+    </div>
+    {% empty %}
+    <div class="soft-skill-card"><i class="fas fa-users"></i><span>Leadership</span></div>
+    <div class="soft-skill-card"><i class="fas fa-tasks"></i><span>Project Management</span></div>
+    <div class="soft-skill-card"><i class="fas fa-comments"></i><span>Communication</span></div>
+    <div class="soft-skill-card"><i class="fas fa-clock"></i><span>Time Management</span></div>
+    <div class="soft-skill-card"><i class="fas fa-handshake"></i><span>Team Collaboration</span></div>
+    <div class="soft-skill-card"><i class="fas fa-lightbulb"></i><span>Problem Solving</span></div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

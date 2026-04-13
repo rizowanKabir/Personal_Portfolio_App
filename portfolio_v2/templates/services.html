@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}Services | Rizowan Kabir{% endblock %}
+
+{% block content %}
+
+<div class="page-hero fade-up">
+  <div class="section-label">What I offer</div>
+  <h1 class="section-title">My <span>Services</span></h1>
+  <p class="page-hero-sub">Professional backend development services tailored to your needs.</p>
+</div>
+
+<!-- ══ SERVICES GRID ══ -->
+<section class="section-wrap">
+  <div class="services-grid services-grid-lg">
+    {% for service in services %}
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas {{ service.icon }}"></i></div>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description }}</p>
+    </div>
+    {% empty %}
+    <!-- Static fallback -->
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-server"></i></div>
+      <h3>Backend Development</h3>
+      <p>Building production-ready web applications using Django, Flask, and FastAPI. Implementing MVT/MVC architecture for scalable and maintainable codebases with clean REST API design.</p>
+    </div>
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-plug"></i></div>
+      <h3>REST API Development</h3>
+      <p>Designing and building robust RESTful APIs using Django REST Framework (DRF) and FastAPI. Proper error handling, data validation, serialization, and comprehensive API documentation.</p>
+    </div>
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-database"></i></div>
+      <h3>Database Design & Optimization</h3>
+      <p>Designing efficient database schemas for MySQL and MongoDB. Implementing indexing, normalization, and query optimization techniques for fast and reliable data retrieval.</p>
+    </div>
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3>Authentication & Security</h3>
+      <p>Implementing secure authentication systems using JWT tokens and session-based authentication. Role-based access control (RBAC) for multi-user applications with different permission levels.</p>
+    </div>
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-vial"></i></div>
+      <h3>Testing & Code Quality</h3>
+      <p>Writing unit tests and integration tests achieving 75%+ code coverage. Ensuring reliability and reducing bugs in production. Following clean code principles and SOLID design patterns.</p>
+    </div>
+    <div class="service-card service-card-lg fade-up">
+      <div class="service-icon"><i class="fas fa-code-branch"></i></div>
+      <h3>Version Control & Workflow</h3>
+      <p>Managing codebase with Git and GitHub following feature branching workflows. Writing meaningful commit messages and maintaining a clean, collaborative development workflow.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section class="section-wrap section-alt">
+  <div class="section-label fade-up">How I work</div>
+  <h2 class="section-title fade-up">My <span>Process</span></h2>
+  <div class="process-steps">
+    <div class="process-step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Understand Requirements</h4>
+        <p>Deep-dive into your project goals, technical constraints, and user needs before writing any code.</p>
+      </div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Design & Plan</h4>
+        <p>Design database schema, API endpoints, and project architecture before implementation begins.</p>
+      </div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Build & Test</h4>
+        <p>Write clean, well-tested code following SOLID principles with 75%+ test coverage.</p>
+      </div>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Deliver & Support</h4>
+        <p>Deploy the application, provide documentation, and offer ongoing support as needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="section-wrap">
+  <div class="cta-box fade-up">
+    <h2>Ready to work together?</h2>
+    <p>Let's discuss your project and see how I can help you build something great.</p>
+    <a href="{% url 'contact' %}" class="btn-primary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+  </div>
+</section>
+
+{% endblock %}

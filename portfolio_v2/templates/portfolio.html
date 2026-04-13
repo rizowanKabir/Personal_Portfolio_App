@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Portfolio | Rizowan Kabir{% endblock %}
+
+{% block content %}
+
+<div class="page-hero fade-up">
+  <div class="section-label">What I've built</div>
+  <h1 class="section-title">My <span>Portfolio</span></h1>
+  <p class="page-hero-sub">Full-stack web applications built with Python, Django & more.</p>
+</div>
+
+<!-- ══ PORTFOLIO GRID ══ -->
+<section class="section-wrap">
+  <div class="portfolio-grid portfolio-grid-lg">
+    {% for project in projects %}
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas {{ project.icon }}"></i></div>
+        <div class="portfolio-links-top">
+          {% if project.github_url %}
+          <a href="{{ project.github_url }}" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          {% endif %}
+          {% if project.live_url %}
+          <a href="{{ project.live_url }}" target="_blank" title="Live"><i class="fas fa-external-link-alt"></i></a>
+          {% endif %}
+        </div>
+      </div>
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description }}</p>
+      <div class="portfolio-tech">
+        {% for tech in project.get_tech_list %}
+        <span class="tech-badge">{{ tech }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% empty %}
+    <!-- Static fallback -->
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas fa-hospital"></i></div>
+      </div>
+      <h3>Hospital Management System</h3>
+      <p>Comprehensive hospital platform with dashboards for patients, doctors, managers, and admins. Appointment booking with real-time availability, automated scheduling, and email notifications.</p>
+      <div class="portfolio-tech">
+        <span class="tech-badge">Django</span>
+        <span class="tech-badge">MySQL</span>
+        <span class="tech-badge">Bootstrap</span>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas fa-briefcase"></i></div>
+      </div>
+      <h3>Job Portal Management System</h3>
+      <p>Full-featured job portal connecting employers and job seekers. Resume upload with parser, application tracking, automated email notifications, and scalable database schema.</p>
+      <div class="portfolio-tech">
+        <span class="tech-badge">Django</span>
+        <span class="tech-badge">MySQL</span>
+        <span class="tech-badge">DRF</span>
+        <span class="tech-badge">Bootstrap</span>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas fa-share-alt"></i></div>
+      </div>
+      <h3>Mini Social Media Application</h3>
+      <p>Real-time social platform with posts, likes, comments, and follow/unfollow. User authentication, profile management, and news feed algorithm using MongoDB for flexible storage.</p>
+      <div class="portfolio-tech">
+        <span class="tech-badge">Django</span>
+        <span class="tech-badge">MongoDB</span>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas fa-apple-alt"></i></div>
+      </div>
+      <h3>Calorie Management System</h3>
+      <p>Nutrition tracking app for monitoring daily calorie intake and fitness goals. Food database API integration for easy meal logging and detailed nutritional analysis.</p>
+      <div class="portfolio-tech">
+        <span class="tech-badge">Django</span>
+        <span class="tech-badge">MySQL</span>
+        <span class="tech-badge">Bootstrap</span>
+      </div>
+    </div>
+    <div class="portfolio-card fade-up">
+      <div class="portfolio-card-header">
+        <div class="portfolio-icon"><i class="fas fa-wallet"></i></div>
+      </div>
+      <h3>Cash Management System</h3>
+      <p>Financial tracking system for income, expenses, and detailed reports. Real-time analytics dashboard, budget tracking, expense categorization, and PDF export functionality.</p>
+      <div class="portfolio-tech">
+        <span class="tech-badge">Django</span>
+        <span class="tech-badge">MySQL</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="section-wrap section-alt">
+  <div class="cta-box fade-up">
+    <h2>Interested in working together?</h2>
+    <p>I'm open to junior backend developer opportunities in Bangladesh.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+      <a href="{% url 'contact' %}"   class="btn-primary"> <i class="fas fa-paper-plane"></i> Contact Me</a>
+      <a href="{% url 'services' %}"  class="btn-secondary"><i class="fas fa-list"></i> My Services</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
